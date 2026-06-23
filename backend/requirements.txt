@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+crewai
+langchain-openai
+pydantic
+sse-starlette
