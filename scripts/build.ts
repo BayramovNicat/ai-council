@@ -1,4 +1,4 @@
-import { rm, mkdir, mkdtemp, readFile, writeFile, copyFile } from "node:fs/promises";
+import { rm, mkdir, mkdtemp, readFile, writeFile, copyFile, cp } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir } from "node:os";
@@ -71,6 +71,17 @@ async function main() {
     );
 
     await copyFile(iconSource, iconTarget);
+
+    const nextStandalone = join(projectPath, ".next", "standalone");
+    const nextStatic = join(projectPath, ".next", "static");
+    const publicDir = join(projectPath, "public");
+    const appResourcesDir = join(resourcesDir, "app");
+
+    await cp(nextStandalone, appResourcesDir, { recursive: true });
+    await cp(nextStatic, join(appResourcesDir, ".next", "static"), { recursive: true });
+    if (existsSync(publicDir)) {
+      await cp(publicDir, join(appResourcesDir, "public"), { recursive: true });
+    }
 
     console.log("Compiling swift launcher...");
     const swiftc = spawnSync(

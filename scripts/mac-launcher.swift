@@ -142,10 +142,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func startServer() {
 		let process = Process()
-		process.currentDirectoryURL = URL(fileURLWithPath: projectPath)
+		
+		let bundlePath = Bundle.main.resourcePath ?? ""
+		let appDir = (bundlePath as NSString).appendingPathComponent("app")
+		let serverScriptPath = (appDir as NSString).appendingPathComponent("server.js")
+
+		process.currentDirectoryURL = URL(fileURLWithPath: appDir)
 		process.executableURL = URL(fileURLWithPath: bunPath)
-		process.arguments = [projectPath + "/node_modules/next/dist/bin/next", "start", "-p", "20129"]
-		process.environment = ["PATH": "{{BUN_DIR}}:" + (ProcessInfo.processInfo.environment["PATH"] ?? ""), "PORT": "20129"]
+		process.arguments = [serverScriptPath]
+		process.environment = [
+			"PATH": "{{BUN_DIR}}:" + (ProcessInfo.processInfo.environment["PATH"] ?? ""),
+			"PORT": "20129",
+			"HOSTNAME": "127.0.0.1"
+		]
 		process.standardOutput = Pipe()
 		process.standardError = Pipe()
 

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build:mac": "bun run scripts/build.ts"
+    "build:mac": "bun run build && bun run scripts/build.ts"
   },
   "dependencies": {
     "lucide-react": "^1.21.0",
