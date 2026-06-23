@@ -5,11 +5,11 @@ export class OmniRouteProvider implements ILLMProvider {
   private model: string;
   private apiKey: string;
 
-  constructor() {
-    this.baseUrl = process.env.OMNIROUTE_BASE_URL || "http://localhost:20128/v1";
-    const rawModel = process.env.OMNIROUTE_MODEL || "openai/free-forever";
+  constructor(customUrl?: string, customModel?: string, customKey?: string) {
+    this.baseUrl = customUrl || process.env.OMNIROUTE_BASE_URL || "http://localhost:20128/v1";
+    const rawModel = customModel || process.env.OMNIROUTE_MODEL || "openai/free-forever";
     this.model = rawModel.includes("/") ? rawModel : `openai/${rawModel}`;
-    this.apiKey = process.env.OMNIROUTE_API_KEY || "omniroute";
+    this.apiKey = customKey || process.env.OMNIROUTE_API_KEY || "omniroute";
   }
 
   async streamChat(

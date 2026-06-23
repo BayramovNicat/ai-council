@@ -12,7 +12,12 @@ function sse(event: string, data: Record<string, unknown>): string {
 
 export async function POST(req: NextRequest) {
   const { topic, transcript, question } = await req.json();
-  const provider = new OmniRouteProvider();
+
+  const customUrl = req.headers.get("x-provider-url") || undefined;
+  const customKey = req.headers.get("x-api-key") || req.headers.get("authorization")?.replace("Bearer ", "") || undefined;
+  const customModel = req.headers.get("x-model-name") || undefined;
+
+  const provider = new OmniRouteProvider(customUrl, customModel, customKey);
   const encoder = new TextEncoder();
 
   const stream = new ReadableStream({
