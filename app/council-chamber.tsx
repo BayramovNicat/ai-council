@@ -233,18 +233,18 @@ export default function CouncilChamber() {
       </button>
 
       {settingsOpen ? (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-[24px] border border-white/5 bg-[#070a13] p-5 shadow-2xl">
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md">
+          <div className="w-full max-w-sm rounded-3xl border border-white/6 bg-[#050816] p-5 shadow-2xl">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-white">AI Provider</h2>
-                <p className="mt-1 text-[8px] uppercase tracking-wider text-zinc-650">Setup connection keys</p>
+                <p className="mt-1 text-[8px] uppercase tracking-wider text-zinc-500">Setup connection keys</p>
               </div>
               {providerUrl && apiKey && modelName ? (
                 <button
                   type="button"
                   onClick={() => setSettingsOpen(false)}
-                  className="rounded-full border border-white/5 bg-white/[0.02] px-2.5 py-1 text-[9px] uppercase tracking-wider text-zinc-400 hover:bg-white/5"
+                  className="rounded-full border border-white/5 bg-white/2 px-2.5 py-1 text-[9px] uppercase tracking-wider text-zinc-400 hover:bg-white/5"
                 >
                   Close
                 </button>
@@ -263,7 +263,7 @@ export default function CouncilChamber() {
               <Field label="Model" value={tempModel} onChange={setTempModel} placeholder="e.g. gemini-cli/gemini-2.0-flash" />
 
               <div className="flex items-center justify-between gap-3 pt-2">
-                <p className="max-w-[200px] text-[8px] leading-relaxed text-zinc-600 uppercase tracking-wider">
+                <p className="max-w-50 text-[8px] leading-relaxed text-zinc-600 uppercase tracking-wider">
                   Credentials are saved locally in browser storage.
                 </p>
                 <button
@@ -299,13 +299,13 @@ type FieldProps = {
 function Field({ label, value, onChange, placeholder, type = "text" }: FieldProps) {
   return (
     <label className="block space-y-1.5">
-      <span className="text-[9px] uppercase tracking-[0.2em] text-zinc-550">{label}</span>
+      <span className="text-[9px] uppercase tracking-[0.2em] text-zinc-500">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-white/5 bg-white/[0.01] px-3.5 py-2.5 text-xs text-zinc-100 outline-none placeholder:text-zinc-700 focus:border-cyan-400/30 focus:bg-white/[0.02]"
+        className="w-full rounded-xl border border-white/5 bg-white/1 px-3.5 py-2.5 text-xs text-zinc-100 outline-none placeholder:text-zinc-700 focus:border-cyan-400/30 focus:bg-white/2"
       />
     </label>
   );

@@ -24,7 +24,7 @@ export default function CenterStage({
   const activeMeta = council.find((agent) => agent.name === activeAgent) ?? null;
 
   return (
-    <main className="flex-1 flex flex-col min-h-0 rounded-xl border border-white/[0.04] bg-white/[0.01] p-4 relative overflow-hidden">
+    <main className="flex-1 flex flex-col min-h-0 rounded-xl border border-white/4 bg-white/1 p-4 relative overflow-hidden">
       {verdict ? (
         <div className="flex flex-col h-full justify-between">
           <div className="flex flex-col min-h-0 overflow-y-auto">
@@ -44,7 +44,7 @@ export default function CenterStage({
               onFollowup(q);
               setFollowupText("");
             }}
-            className="mt-4 border-t border-white/[0.04] pt-3 shrink-0"
+            className="mt-4 border-t border-white/4 pt-3 shrink-0"
           >
             <div className="text-[8px] uppercase tracking-[0.22em] text-zinc-500 mb-2">Continue Conversation</div>
             <div className="flex gap-2">
@@ -52,7 +52,7 @@ export default function CenterStage({
                 value={followupText}
                 onChange={(e) => setFollowupText(e.target.value)}
                 placeholder="Ask follow-up question..."
-                className="flex-1 rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2 text-xs text-zinc-100 outline-none focus:border-cyan-400/30"
+                className="flex-1 rounded-lg border border-white/6 bg-white/2 px-3 py-2 text-xs text-zinc-100 outline-none focus:border-cyan-400/30"
               />
               <button
                 type="submit"
@@ -69,7 +69,7 @@ export default function CenterStage({
         <div className="flex flex-col h-full justify-center items-center text-center p-6">
           <div className="relative mb-6">
             <div className="absolute inset-0 rounded-full bg-cyan-400/10 blur-xl animate-pulse" />
-            <div className={`grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br ${activeMeta.tone} text-[#03050c] shadow-lg animate-bounce`}>
+            <div className={`grid h-16 w-16 place-items-center rounded-2xl bg-linear-to-br ${activeMeta.tone} text-[#03050c] shadow-lg animate-bounce`}>
               <Mic className="h-8 w-8" />
             </div>
           </div>
