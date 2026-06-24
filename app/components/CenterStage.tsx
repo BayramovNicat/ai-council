@@ -24,7 +24,7 @@ export default function CenterStage({
   const activeMeta = council.find((agent) => agent.name === activeAgent) ?? null;
 
   return (
-    <main className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-white/8 bg-white/[0.02] p-4 backdrop-blur-2xl">
+    <main className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-white/6 bg-white/[0.025] p-4 backdrop-blur-3xl">
       {verdict ? (
         <div className="flex flex-col h-full justify-between">
           <div className="flex flex-col min-h-0 overflow-y-auto">

@@ -10,7 +10,7 @@ interface TranscriptSidebarProps {
 
 export default function TranscriptSidebar({ transcript, feedEndRef }: TranscriptSidebarProps) {
   return (
-    <section className="w-70 shrink-0 flex min-h-0 flex-col rounded-2xl border border-white/8 bg-white/[0.02] p-3 backdrop-blur-2xl">
+    <section className="w-70 shrink-0 flex min-h-0 flex-col p-3">
       <div className="flex items-center gap-2 text-[9px] uppercase tracking-[0.24em] text-zinc-500 pb-2 border-b border-white/4 mb-2">
         <Terminal className="h-3.5 w-3.5" /> Live Transcript
       </div>

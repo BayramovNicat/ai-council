@@ -11,7 +11,7 @@ interface HeaderProps {
 
 export default function Header({ topic, setTopic, running, onStart }: HeaderProps) {
   return (
-    <header className="flex h-15 shrink-0 items-center justify-between rounded-2xl border border-white/8 bg-white/[0.02] px-4 pb-3 backdrop-blur-2xl">
+    <header className="flex h-15 shrink-0 items-center justify-between border-b border-white/5 pb-3">
       <div className="flex items-center gap-3">
         <div className="grid h-9 w-9 place-items-center rounded-lg border border-cyan-400/20 bg-cyan-400/5 text-cyan-300">
           <Brain className="h-5 w-5" />
