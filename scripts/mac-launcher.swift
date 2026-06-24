@@ -85,7 +85,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		blurView.blendingMode = .behindWindow
 		blurView.state = .active
 		blurView.wantsLayer = true
-		blurView.layer?.backgroundColor = NSColor.clear.cgColor
+		blurView.layer?.backgroundColor = NSColor(calibratedRed: 0.02, green: 0.03, blue: 0.06, alpha: 0.35).cgColor
 		blurView.translatesAutoresizingMaskIntoConstraints = false
 
 		let window = NSWindow(
