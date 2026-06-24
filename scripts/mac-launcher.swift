@@ -6,6 +6,12 @@ let projectPath = "{{PROJECT_PATH}}"
 let bunPath = "{{BUN_PATH}}"
 let serverURL = URL(string: "http://127.0.0.1:20129")!
 
+final class DragView: NSView {
+	override var mouseDownCanMoveWindow: Bool {
+		return true
+	}
+}
+
 final class AppDelegate: NSObject, NSApplicationDelegate {
 	var window: NSWindow?
 	var webView: WKWebView?
@@ -88,11 +94,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		blurView.layer?.backgroundColor = NSColor.clear.cgColor
 		blurView.translatesAutoresizingMaskIntoConstraints = false
 
-		let dragStrip = NSView(frame: .zero)
+		let dragStrip = DragView(frame: .zero)
 		dragStrip.translatesAutoresizingMaskIntoConstraints = false
 		dragStrip.wantsLayer = true
 		dragStrip.layer?.backgroundColor = NSColor.clear.cgColor
-		dragStrip.mouseDownCanMoveWindow = true
 
 		let window = NSWindow(
 			contentRect: NSRect(x: 0, y: 0, width: 1400, height: 900),
