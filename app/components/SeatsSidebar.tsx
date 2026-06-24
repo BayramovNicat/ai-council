@@ -15,7 +15,7 @@ export default function SeatsSidebar({ activeAgent, statuses }: SeatsSidebarProp
         : "bg-zinc-700";
 
   return (
-    <aside className="w-45 shrink-0 flex flex-col gap-2 overflow-y-auto pr-1">
+    <aside className="w-45 shrink-0 flex flex-col gap-2 overflow-y-auto pr-1 rounded-2xl border border-white/8 bg-white/[0.015] p-2 backdrop-blur-2xl">
       <div className="text-[9px] uppercase tracking-[0.24em] text-zinc-500 pb-1">Council Seats</div>
       {council.map((agent) => {
         const isActive = activeAgent === agent.name;
@@ -24,7 +24,7 @@ export default function SeatsSidebar({ activeAgent, statuses }: SeatsSidebarProp
           <div
             key={agent.name}
             className={`flex items-center justify-between p-2 rounded-lg border transition-all ${
-              isActive ? "bg-cyan-400/4 border-cyan-400/35" : "bg-[#0b1020]/25 border-white/4"
+              isActive ? "bg-cyan-400/5 border-cyan-400/35" : "bg-transparent border-white/4"
             }`}
           >
             <div className="flex items-center gap-2">
