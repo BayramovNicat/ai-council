@@ -74,15 +74,40 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	func showWindow() {
 		let config = WKWebViewConfiguration()
 		let webView = WKWebView(frame: .zero, configuration: config)
+		webView.setValue(false, forKey: "drawsBackground")
+		if #available(macOS 12.0, *) {
+			webView.underPageBackgroundColor = .clear
+		}
+		webView.layer?.isOpaque = false
+		webView.translatesAutoresizingMaskIntoConstraints = false
+
+		let blurView = NSVisualEffectView(frame: .zero)
+		blurView.material = .underWindowBackground
+		blurView.blendingMode = .behindWindow
+		blurView.state = .active
+		blurView.translatesAutoresizingMaskIntoConstraints = false
+
 		let window = NSWindow(
 			contentRect: NSRect(x: 0, y: 0, width: 1400, height: 900),
-			styleMask: [.titled, .closable, .resizable, .miniaturizable],
+			styleMask: [.titled, .closable, .resizable, .miniaturizable, .fullSizeContentView],
 			backing: .buffered,
 			defer: false
 		)
 		window.title = appName
+		window.titlebarAppearsTransparent = true
+		window.titleVisibility = .hidden
+		window.isOpaque = false
+		window.hasShadow = true
+		window.backgroundColor = .clear
 		window.center()
-		window.contentView = webView
+		window.contentView = blurView
+		blurView.addSubview(webView)
+		NSLayoutConstraint.activate([
+			webView.leadingAnchor.constraint(equalTo: blurView.leadingAnchor),
+			webView.trailingAnchor.constraint(equalTo: blurView.trailingAnchor),
+			webView.topAnchor.constraint(equalTo: blurView.topAnchor),
+			webView.bottomAnchor.constraint(equalTo: blurView.bottomAnchor),
+		])
 		window.makeKeyAndOrderFront(nil)
 		NSApp.activate(ignoringOtherApps: true)
 

@@ -196,7 +196,7 @@ export default function CouncilChamber() {
   };
 
   return (
-    <div className="relative flex h-screen max-h-screen w-screen flex-col overflow-hidden bg-[#03050c] p-3 text-zinc-300 md:p-4 font-sans">
+    <div className="relative flex h-screen max-h-screen w-screen flex-col overflow-hidden bg-transparent p-3 text-zinc-300 md:p-4 font-sans">
       <Header
         topic={topic}
         setTopic={setTopic}
