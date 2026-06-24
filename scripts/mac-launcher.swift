@@ -85,12 +85,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		blurView.blendingMode = .behindWindow
 		blurView.state = .active
 		blurView.wantsLayer = true
-		blurView.layer?.backgroundColor = NSColor(calibratedRed: 0.02, green: 0.03, blue: 0.06, alpha: 0.35).cgColor
+		blurView.layer?.backgroundColor = NSColor.clear.cgColor
 		blurView.translatesAutoresizingMaskIntoConstraints = false
+
+		let dragStrip = NSView(frame: .zero)
+		dragStrip.translatesAutoresizingMaskIntoConstraints = false
+		dragStrip.wantsLayer = true
+		dragStrip.layer?.backgroundColor = NSColor.clear.cgColor
+		dragStrip.mouseDownCanMoveWindow = true
 
 		let window = NSWindow(
 			contentRect: NSRect(x: 0, y: 0, width: 1400, height: 900),
-			styleMask: [.titled, .closable, .resizable, .miniaturizable],
+			styleMask: [.titled, .closable, .resizable, .miniaturizable, .fullSizeContentView],
 			backing: .buffered,
 			defer: false
 		)
@@ -106,6 +112,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		guard let containerView = window.contentView else { return }
 
 		containerView.addSubview(blurView)
+		containerView.addSubview(dragStrip)
 		containerView.addSubview(webView)
 
 		NSLayoutConstraint.activate([
@@ -114,9 +121,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 			blurView.topAnchor.constraint(equalTo: containerView.topAnchor),
 			blurView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
 
+			dragStrip.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+			dragStrip.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+			dragStrip.topAnchor.constraint(equalTo: containerView.topAnchor),
+			dragStrip.heightAnchor.constraint(equalToConstant: 32),
+
 			webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
 			webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-			webView.topAnchor.constraint(equalTo: containerView.topAnchor),
+			webView.topAnchor.constraint(equalTo: dragStrip.bottomAnchor),
 			webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
 		])
 		window.makeKeyAndOrderFront(nil)
