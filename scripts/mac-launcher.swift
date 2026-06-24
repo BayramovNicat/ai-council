@@ -78,15 +78,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		if #available(macOS 12.0, *) {
 			webView.underPageBackgroundColor = .clear
 		}
-		webView.wantsLayer = true
-		webView.layer?.isOpaque = false
-		webView.layer?.backgroundColor = NSColor.clear.cgColor
 		webView.translatesAutoresizingMaskIntoConstraints = false
 
 		let blurView = NSVisualEffectView(frame: .zero)
-		blurView.material = .underWindowBackground
+		blurView.material = .hudWindow
 		blurView.blendingMode = .behindWindow
 		blurView.state = .active
+		blurView.wantsLayer = true
+		blurView.layer?.backgroundColor = NSColor.clear.cgColor
 		blurView.translatesAutoresizingMaskIntoConstraints = false
 
 		let window = NSWindow(
@@ -102,13 +101,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		window.hasShadow = true
 		window.backgroundColor = .clear
 		window.center()
-		window.contentView = blurView
-		blurView.addSubview(webView)
+
+		guard let containerView = window.contentView else { return }
+
+		containerView.addSubview(blurView)
+		containerView.addSubview(webView)
+
 		NSLayoutConstraint.activate([
-			webView.leadingAnchor.constraint(equalTo: blurView.leadingAnchor),
-			webView.trailingAnchor.constraint(equalTo: blurView.trailingAnchor),
-			webView.topAnchor.constraint(equalTo: blurView.topAnchor),
-			webView.bottomAnchor.constraint(equalTo: blurView.bottomAnchor),
+			blurView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+			blurView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+			blurView.topAnchor.constraint(equalTo: containerView.topAnchor),
+			blurView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+
+			webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+			webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+			webView.topAnchor.constraint(equalTo: containerView.topAnchor),
+			webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
 		])
 		window.makeKeyAndOrderFront(nil)
 		NSApp.activate(ignoringOtherApps: true)
@@ -119,7 +127,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		<head>
 		<style>
 		body {
-			background-color: #03050c;
+			background-color: transparent;
 			color: #a1a1aa;
 			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 			display: flex;
