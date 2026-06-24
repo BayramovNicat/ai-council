@@ -78,7 +78,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		if #available(macOS 12.0, *) {
 			webView.underPageBackgroundColor = .clear
 		}
+		webView.wantsLayer = true
 		webView.layer?.isOpaque = false
+		webView.layer?.backgroundColor = NSColor.clear.cgColor
 		webView.translatesAutoresizingMaskIntoConstraints = false
 
 		let blurView = NSVisualEffectView(frame: .zero)
